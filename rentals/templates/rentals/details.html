@@ -1,0 +1,21 @@
+<!-- Content that is going to chance -->
+{% extends "rentals/base.html" %}
+<!-- this is really important is telling the template that is going to load the extend -->
+{% load static %}
+<!-- Content that is going to chance -->
+{%  block content %}
+    <div style="background-color: white">
+      <h4>{{estate.title}}</h4>
+      <div>
+        <ul>
+        {% for facility in estate.facility.all %}
+          <li>{{facility}}</li>  
+        {% endfor %}
+        </ul>
+      </div>
+      <p>{{estate.description}}</p>
+      <span>{{estate.zone}}</span>
+      <span>{{estate.pax}}</span>
+      <span>{{estate.amount}}</span>
+    </div>
+{% endblock %}

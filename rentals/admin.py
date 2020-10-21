@@ -1,4 +1,7 @@
 from django.contrib import admin
+from django.db import models
+from django.forms import CheckboxSelectMultiple
+
 from rentals.models import Facility, City, Reservation, Estate, RentalDate
 
 
@@ -29,6 +32,10 @@ class EstateAdmin(admin.ModelAdmin):
     list_display = ("title", "pax", "amount")
     list_filter = ("title", "pax",)
     search_fields = ("title",)
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
+# todo tenemos que permitir seleccionar una lista de facilities
 
 
 admin.site.register(Facility, FacilityAdmin)

@@ -1,3 +1,39 @@
 <!-- Content that is going to chance -->
 {% extends "rentals/base.html" %}
 <!-- this is really important is telling the template that is going to load the extend -->
+{% load static %}
+
+<!-- Content that is going to chance -->
+{%  block content %}
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      {% for estate in estates_list %}
+      <!-- CUSTOMIZE FROM HERE -->
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+              dy=".3em">Thumbnail</text>
+          </svg>
+          <div class="card-body">
+            <h5 class="card-title">{{estate.title}}</h5>
+            <p class="card-text" style="font-size: 13px">Zona: {{estate.zone}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'rentals:details' estate.id %}">Ver</a>
+              </div>
+              <small class="text-muted">Precio: {{estate.amount}}</small>
+              <small class="text-muted">Capacidad: {{estate.pax}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

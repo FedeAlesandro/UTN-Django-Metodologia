@@ -24,13 +24,14 @@ class City(models.Model):
 
 
 class Estate(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
+    title = models.CharField(max_length=30)
+    zone = models.CharField(max_length=20)
+    description = models.TextField(max_length=500)
     pax = models.IntegerField()
     amount = models.FloatField()
     commission = models.FloatField(default='0.08', editable=False)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    facility = models.ForeignKey(Facility, on_delete=models.SET_NULL, null=True)
+    facility = models.ManyToManyField(Facility)
     # image = models.ImageField()
 
     def __str__(self):
