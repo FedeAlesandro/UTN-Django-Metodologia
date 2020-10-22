@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+</head>
+<body>
+    <form action="/make_filter/" method="POST">
+        {% csrf_token %}
+        <input type="date" name="since_date">
+        <input type="date" name="to_date">
+        <input type="number" name="pax">
+        <input type="text" name="city">
+        <button type="submit">Filter</button>
+    </form>
+</body>
+</html>

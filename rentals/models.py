@@ -40,8 +40,7 @@ class Estate(models.Model):
 
 class Reservation(models.Model):
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE)
-    since_date = models.DateField()
-    to_date = models.DateField()
+    date = models.DateField()
     code = models.CharField(max_length=100, editable=False)
     amount = models.FloatField(editable=False)
     guest_name = models.CharField(max_length=200, blank=True, null=False, editable=False)

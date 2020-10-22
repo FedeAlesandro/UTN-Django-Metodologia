@@ -16,7 +16,7 @@ class FacilityAdmin(admin.ModelAdmin):
 
 
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ("since_date", "to_date", "amount", "guest_name")
+    list_display = ("date", "amount", "guest_name")
     list_filter = ("guest_email",)
     search_fields = ("name",)
 
