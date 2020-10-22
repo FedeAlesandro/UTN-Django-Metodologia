@@ -70,11 +70,11 @@ def reserve(request, estate_id):
                                       guest_name, guest_last_name, guest_email)
             reservation.save()
 
-            # for fecha in fecha_filtradas:
-            #     rental_date = RentalDate.objects.get(date=datetime.datetime.strptime(fecha, "%d%m%Y").date(),
-            #                                          estate=estate)
-            #     rental_date.reservation = reservation
-            #     rental_date.save()
+            for date in date_list:
+                rental_date = RentalDate.objects.get(date=datetime.datetime.strptime(date, "%Y-%m-%d").date(),
+                                                     estate=estate)
+                rental_date.reservation = reservation
+                rental_date.save()
 
             return HttpResponseRedirect(reverse('rentals:details', args=(estate,)))
     except():
