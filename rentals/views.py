@@ -44,12 +44,22 @@ def make_filter(request):
                 since_date = since_date + datetime.timedelta(days=1)
             date_list.append(to_date)
             city = City.objects.get(name=city)
-            for date in date_list:
-                rentals_dates = RentalDate.objects.filter(date=date)
-                for rental_date in rentals_dates:
-                    estate = Estate.objects.get(pk=rental_date.estate, city=city, pax=total_pax)
-                    if not estates.__contains__(estate):
+
+            #  for date in date_list:
+            #    rentals_dates = RentalDate.objects.filter(date=date)
+            #    for rental_date in rentals_dates:
+            #        estate = Estate.objects.get(pk=rental_date.estate_id, city=city, pax=total_pax)
+            #        if not estates._contains_(estate):
+            #            estates.append(estate)
+
+            estates_aux = Estate.objects.filter(city=city, pax=total_pax)  # filtro por ciudad y por pax
+            for estate in estates_aux:
+                for date in date_list:
+                    try:
+                        rental_date = RentalDate.objects.get(estate_id=estate.id, date=date)
                         estates.append(estate)
+                    except RentalDate.DoesNotExist:
+                        print("xd")
 
             return HttpResponseRedirect(reverse('rentals:home'))
     except():
