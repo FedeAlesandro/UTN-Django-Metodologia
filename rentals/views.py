@@ -48,7 +48,7 @@ def make_filter(request):
                 rentals_dates = RentalDate.objects.filter(date=date)
                 for rental_date in rentals_dates:
                     estate = Estate.objects.get(pk=rental_date.estate, city=city, pax=total_pax)
-                    if estates.__contains__(estate):
+                    if not estates.__contains__(estate):
                         estates.append(estate)
 
             return HttpResponseRedirect(reverse('rentals:home'))
