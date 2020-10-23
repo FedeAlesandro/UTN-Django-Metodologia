@@ -1,6 +1,7 @@
 import uuid
 import datetime
-from plistlib import UID
+from datetime import date
+
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -27,43 +28,59 @@ class DetailView(generic.DetailView):
 
 
 def estate_filter(request):
-    return render(request, 'rentals/filter.html', None)
+    today = date.today()
+    today_date = datetime.datetime.strptime(today.__str__(), "%Y-%m-%d").__str__()
+    return render(request, 'rentals/filter.html', {"today_date": today_date})
 
 
 def make_filter(request):
     try:
+        # limpiamos las variables globales
+        global estates
+        global date_list
+        if len(estates) != 0:
+            estates = []
+        if len(date_list) != 0:
+            date_list = []
+
         if request.method == 'POST':
             since_date = request.POST['since_date']
             to_date = request.POST['to_date']
             since_date = datetime.datetime.strptime(since_date, "%Y-%m-%d").date()
             to_date = datetime.datetime.strptime(to_date, "%Y-%m-%d").date()
-            city = request.POST['city']
-            total_pax = request.POST['pax']
-            while since_date != to_date:
-                date_list.append(since_date)
-                since_date = since_date + datetime.timedelta(days=1)
-            date_list.append(to_date)
-            city = City.objects.get(name=city)
+            date_is_valid = check_date(since_date, to_date)
+            if date_is_valid:
+                city = request.POST['city']
+                city = city.lower()
+                total_pax = request.POST['pax']
+                # creamos un array de fechas con los dias requeridos
+                while since_date != to_date:
+                    date_list.append(since_date)
+                    since_date = since_date + datetime.timedelta(days=1)
+                date_list.append(to_date)
 
-            #  for date in date_list:
-            #    rentals_dates = RentalDate.objects.filter(date=date)
-            #    for rental_date in rentals_dates:
-            #        estate = Estate.objects.get(pk=rental_date.estate_id, city=city, pax=total_pax)
-            #        if not estates._contains_(estate):
-            #            estates.append(estate)
+                city = City.objects.get(name=city)
+                estates_c = Estate.objects.filter(city=city, pax=total_pax)  # filtro por ciudad y por pax
 
-            estates_aux = Estate.objects.filter(city=city, pax=total_pax)  # filtro por ciudad y por pax
-            for estate in estates_aux:
-                for date in date_list:
-                    try:
-                        rental_date = RentalDate.objects.get(estate_id=estate.id, date=date)
+                for estate in estates_c:  # recorro todas las propiedades que cumplen con la cuidad y el pax
+                    flag = 0
+                    for date in date_list:  # para cada propiedad me traigo el rental_date correspondiente a esa fecha
+                        rentals_date = RentalDate.objects.filter(estate_id=estate.id, date=date)
+                        if not rentals_date:  # si rentals_date viene vacio, la propiedad no tiene ese dia para reservar
+                            flag = 1
+                    if flag == 0:  # si el flag es 0 significa que cumple con todas las fechas
                         estates.append(estate)
-                    except RentalDate.DoesNotExist:
-                        print("xd")
-
-            return HttpResponseRedirect(reverse('rentals:home'))
+                return HttpResponseRedirect(reverse('rentals:home'))
+            else:
+                return render(request, 'rentals/filter.html', {"flag": True})
     except():
         raise Exception("Ups! There was a problem!")
+
+
+def check_date(since_date, to_date):
+    if since_date > to_date:
+        return False
+    return True
 
 
 def reserve(request, estate_id):
