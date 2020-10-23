@@ -11,9 +11,14 @@ class Facility(models.Model):
     def __str__(self):
         return self.name
 
+class NameField(models.CharField): #pasa la variable a lowercase
+    def __init__(self, *args, **kwargs):
+        super(NameField, self).__init__(*args, **kwargs)
 
+    def get_prep_value(self, value):
+        return str(value).lower()
 class City(models.Model):
-    name = models.CharField(max_length=200)
+    name = NameField(max_length=200)
 
     class Meta:
         verbose_name = 'City'
