@@ -5,13 +5,19 @@
 
 </head>
 <body>
-    <form action="/make_filter/" method="POST">
+    <form action="{% url 'rentals:makefilter' %}" method="POST">
         {% csrf_token %}
-        <input type="date" name="since_date">
-        <input type="date" name="to_date">
-        <input type="number" name="pax">
-        <input type="text" name="city">
+        <input type="date" name="since_date" min= {{ today_date }} required>
+        <input type="date" name="to_date" min= {{ today_date }} required>
+        <input type="number" name="pax" min="1" required>
+        <input type="text" name="city" required>
         <button type="submit">Filter</button>
+        {% if flag %}
+        <div class="alert alert-danger" role="alert" >
+            <strong style="text-align: center;">Las fechas ingresadas son incorrectas, intentelo nuevamente.</strong>
+        </div>
+        {% endif %}
+        
     </form>
 </body>
 </html>
