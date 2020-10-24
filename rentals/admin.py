@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django.forms import CheckboxSelectMultiple
+from django.contrib.auth import get_user
 
 from rentals.models import Facility, City, Reservation, Estate, RentalDate
 
@@ -16,16 +17,10 @@ class FacilityAdmin(admin.ModelAdmin):
 
 
 class ReservationAdmin(admin.ModelAdmin):
+    readonly_fields = ('code', 'amount', 'guest_name', 'guest_last_name', 'guest_email')
     list_display = ("date", "amount", "guest_name")
     list_filter = ("guest_email",)
     search_fields = ("name",)
-
-
-class RentalDateAdmin(admin.ModelAdmin):
-    list_display = ("estate",
-                    "date",)
-    list_filter = ("date",)
-    date_hierarchy = "date"
 
 
 class EstateAdmin(admin.ModelAdmin):
@@ -35,11 +30,26 @@ class EstateAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
-# todo tenemos que permitir seleccionar una lista de facilities
+
+
+class RentalDateInline(admin.TabularInline):
+    readonly_fields = ('reservation',)
+    model = RentalDate
+    fk_name = 'estate'
+    max_num = 7
+
+
+class EstateAdmin(admin.ModelAdmin):
+    inlines = [RentalDateInline, ]
+    list_display = ("title", "pax", "amount")
+    list_filter = ("title", "pax",)
+    search_fields = ("title",)
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    }
 
 
 admin.site.register(Facility, FacilityAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(Reservation, ReservationAdmin)
-admin.site.register(RentalDate, RentalDateAdmin)
 admin.site.register(Estate, EstateAdmin)

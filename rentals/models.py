@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Facility(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=50)
 
     class Meta:
         verbose_name = 'Facility'
@@ -11,14 +11,17 @@ class Facility(models.Model):
     def __str__(self):
         return self.name
 
-class NameField(models.CharField): #pasa la variable a lowercase
+
+class NameField(models.CharField):  # pasa la variable a lowercase
     def __init__(self, *args, **kwargs):
         super(NameField, self).__init__(*args, **kwargs)
 
     def get_prep_value(self, value):
         return str(value).lower()
+
+
 class City(models.Model):
-    name = NameField(max_length=200)
+    name = NameField(max_length=50)
 
     class Meta:
         verbose_name = 'City'
@@ -31,7 +34,7 @@ class City(models.Model):
 class Estate(models.Model):
     title = models.CharField(max_length=30)
     zone = models.CharField(max_length=20)
-    description = models.TextField(max_length=500)
+    description = models.TextField(max_length=200)
     pax = models.IntegerField()
     amount = models.FloatField()
     commission = models.FloatField(default='0.08', editable=False)
@@ -47,9 +50,9 @@ class Reservation(models.Model):
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE)
     date = models.DateField()
     code = models.CharField(max_length=100, editable=False)
-    amount = models.FloatField(editable=False)
-    guest_name = models.CharField(max_length=200, blank=True, null=False, editable=False)
-    guest_last_name = models.CharField(max_length=200, blank=True, editable=False)
+    amount = models.FloatField(editable=False, default=0)
+    guest_name = models.CharField(max_length=50, blank=True, null=False, editable=False)
+    guest_last_name = models.CharField(max_length=50, blank=True, editable=False)
     guest_email = models.EmailField(blank=True, editable=False)
 
     def __str__(self):
