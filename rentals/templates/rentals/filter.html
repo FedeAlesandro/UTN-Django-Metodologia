@@ -1,23 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a820c1f4b4.js" crossorigin="anonymous"></script>
+    <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    body{
+        background-color: #fbf3ff;
+    }
+    .container{
+        position: absolute;
+        max-width:  800px;
+        height: 538px;
+        margin: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50% , -50%);
+    }
+    .myRightCtn{
+        position: relative;
+        background-image: linear-gradient(45deg, #28ad33, #1a6b20);
+        border-radius: 25px;
+        height: 100%;
+        padding: 25px;
+        color: rgb(192,192,192);
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .myLeftCtn{
+        position: relative;
+        background: #fff;
+        border-radius: 25px;
+        height: 100%;
+        padding: 25px;
+        padding-left: 50px;
+    }
+    .myLeftCtn header{
+        color: green;
+        font-size: 38px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    .row{
+        height: 100%;
+    }
+    .myCard{
+        position: relative;
+        background: #fff;
+        height: 100%;
+        border-radius: 25px;
+        -webkit-box-shadow: 0px 10px 40px -10px rgba(0 ,0 ,0 ,0.7);
+        -moz-box-shadow: 0px 10px 40px -10px rgba(0 ,0 ,0 ,0.7);
+        box-shadow: 0px 10px 40px -10px rgba(0 ,0 ,0 ,0.7);
+    }
+    .myRightCtn header{
+        color: #fff;
+        font-size: 30px;
+    }
+    .box{
+        position: relative;
+        margin: 20px;
+        margin-bottom: 100px;
+    }
+    .myLeftCtn .myInput{
+        width: 230px;
+        border-radius: 25px;
+        padding: 10px;
+        padding-left: 50px;
+        border: none;
+        -webkit-box-shadow: 0px 10px 49px -14px rgba(0,0,0,0.7);
+        -moz-box-shadow: 0px 10px 49px -14px rgba(0,0,0,0.7);
+        box-shadow: 0px 10px 49px -14px rgba(0 ,0 ,0 ,0.7);
+    }
+    .myLeftCtn .myInput:focus{
+        outline: none;
+    }
+    .myForm{
+        position: relative;
+        margin-top: 50px;
+    }
+    .myLeftCtn .butt{
+        background: linear-gradient(45deg, #28ad33, #1a6b20);
+        color: #fff;
+        width: 230px;
+        border: none;
+        border-radius: 25px;
+        padding: 10px;
+        -webkit-box-shadow: 0px 10px 41px -11px rgba(0,0,0,0.7);
+        -moz-box-shadow: 0px 10px 41px -11px rgba(0,0,0,0.7);
+        box-shadow: 0px 10px 41px -11px rgba(0 ,0 ,0 ,0.7);
+    }
+    .myLeftCtn .butt:hover{
+        background: linear-gradient(45deg, #28b032, #2ab835);
+    }
+    .myLeftCtn .butt:focus{
+        outline: none;
+    }
+    .myLeftCtn .fas{
+        position: relative;
+        color: seagreen;
+        left: 36px;
+    }
+    .butt_out{
+        background: transparent;
+        color: #fff;
+        width: 120px;
+        border: 2px solid#fff;
+        border-radius: 25px;
+        padding: 10px;
+        -webkit-box-shadow: 0px 10px 49px -14px rgba(0,0,0,0.7);
+        -moz-box-shadow: 0px 10px 49px -14px rgba(0,0,0,0.7);
+        box-shadow: 0px 10px 49px -14px rgba(0 ,0 ,0 ,0.7);
+    }
+    .butt_out:hover{
+        border: 2px solid#eecbff;
+    }
+    .butt_out:focus{
+        outline: none;
+    }
+    .invalid-feedback{
+        color: maroon;
+    }
+    </style>
     {% load static %}
-
 </head>
 <body>
-    <form action="{% url 'rentals:makefilter' %}" method="POST">
-        {% csrf_token %}
-        <input type="date" name="since_date" min= {{ today_date }} required>
-        <input type="date" name="to_date" min= {{ today_date }} required>
-        <input type="number" name="pax" min="1" required>
-        <input type="text" name="city" required>
-        <button type="submit">Filter</button>
-        {% if flag %}
-        <div class="alert alert-danger" role="alert" >
-            <strong style="text-align: center;">Las fechas ingresadas son incorrectas, intentelo nuevamente.</strong>
+    <div class="container">
+        <div class="myCard">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="myLeftCtn">
+
+                        <form action="{% url 'rentals:makefilter' %}" method="POST" class="myForm text-center">
+                            {% csrf_token %}
+                            <header>Hospedajes</header>
+                            <div class="form-group">
+                                <i class="fas fa-calendar-day"></i>
+                                <input type="date" class="myInput" name="since_date" min= {{ today_date }} required>
+                            </div>
+
+                            <div class="form-group">
+                                <i class="fas fa-calendar-day"></i>
+                                <input type="date" class="myInput" name="to_date" min= {{ today_date }} required>
+                            </div>
+
+                            <div class="form-group">
+                                <i class="fas fa-user"></i>
+                                <input type="number" class="myInput" name="pax" placeholder="Cantidad de Personas" required>
+                            </div>
+
+                            <div class="form-group">
+                                <i class="fas fa-city"></i>
+                                <input type="text" class="myInput" name="city" placeholder="Ciudad" required>
+                            </div>
+                            {% if flag %}
+                                <div class="invalid-feedback"><small>Las fechas ingresadas son incorrectas.</small></div>
+                            {% endif %}
+                            <div class="form-group">
+                                <label><input type="checkbox" id="check_1" name="check_1">
+                                <small>He leido y estoy de acuerdo con los <a href="#" data-toggle="modal" data-target="#terms">terminos y condiciones</a>.</small></input>
+                                <div class="invalid-feedback">Debes aceptar los terminos.</div>
+                                </label>
+                            </div>
+                            <input type="submit" class="butt" value="BUSCAR PROPIEDAD">
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="myRightCtn">
+                        <div class="box">
+                            <header>Bienvenido!</header>
+                            <p style="font-size: 18px;">Aplicacion realizada con <br> Django 2.2 & Bootstrap 4.5 <br> Universidad Tecnologica Nacional.</p>
+                            <input type="button" class="butt_out" value="About Us" style="font-size: 13px;"  data-toggle="modal" data-target="#info">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endif %}
         
-    </form>
+            
+            <div class="wrapper row6" style="margin-top: 30px;">
+                <div id="copyright" class="clear" align="center"> 
+                    <p >Copyright &copy;  - All Rights Reserved - UTN</p>
+                </div>
+            </div>
+    </div>
+<!-- MODAL ABOUT US START HERE  -->
+<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="info" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" action="<?php echo FRONT_ROOT?>Cinema/edit" method="POST">
+            <div class="modal-header" style="background-image: linear-gradient(45deg, #28ad33, #1a6b20);">
+
+                <h5 class="modal-title" style="color: honeydew;">Students</h5>
+                <button type="button" class="close" data-dismiss="modal" style="color: honeydew;">
+                    <span>&times;</span>
+                </button>
+
+            </div>
+
+            <div class="modal-body" style="align-items: center; left: 100px;"> 
+                <ul> 
+                    <li style="font-size: 25px;">Jorge Villordo <a target="_blank" href="https://github.com/villordo"><i class="fab fa-github"></i></a> <a target="_blank" href="https://www.linkedin.com/in/jorge-villordo-145102191/"><i class="fab fa-linkedin"></i></a></li>
+                    <li style="font-size: 25px;">Federico Alessandro <a target="_blank" href="https://github.com/FedeAlesandro"><i class="fab fa-github"></i></a> <a target="_blank" href="https://www.linkedin.com/in/fedealesandro/"><i class="fab fa-linkedin"></i></a></li>
+                    <li style="font-size: 25px;">Ivan Graciarena <a target="_blank" href="https://github.com/IGraciarena"><i class="fab fa-github"></i></a> <a target="_blank" href="https://www.linkedin.com/in/ivan-graciarena/"><i class="fab fa-linkedin"></i></a></li>
+                    <li style="font-size: 25px;">Fabio Laguna <a target="_blank" href="https://github.com/fabiolaguna"><i class="fab fa-github"></i></a> <a target="_blank" href="https://www.linkedin.com/in/fabiolaguna/"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+                    
+            </div>
+
+            <div class="modal-footer" style="background-image: linear-gradient(45deg, #28ad33, #1a6b20);">
+                <button type="button" class="btn btn-link" data-dismiss="modal" style="color: white;">Cancelar</button>
+                
+            </div>
+        </form>
+    </div>
+</div>
+<!-- MODAL ENDS HERE  -->
+
+<!-- MODAL TERMS OF SERVICE START HERE  -->
+<div class="modal fade" id="terms" tabindex="-1" role="dialog" aria-labelledby="terms" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" action="<?php echo FRONT_ROOT?>Cinema/edit" method="POST">
+            <div class="modal-header" style="background-image: linear-gradient(45deg, #28ad33, #1a6b20);">
+
+                <h5 class="modal-title" style="color: honeydew;">Terms of service</h5>
+                <button type="button" class="close" data-dismiss="modal" style="color: honeydew;">
+                    <span>&times;</span>
+                </button>
+
+            </div>
+
+            <div class="modal-body" style="align-items: center;"> 
+                <p><strong>Hello world!</strong><br><br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quia pariatur nostrum dolores est impedit quaerat maiores amet. Minus distinctio recusandae facilis repellendus reprehenderit nihil assumenda adipisci laboriosam cupiditate quae. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur fuga quaerat quasi libero ab quam culpa, aliquam iure dicta cupiditate, nisi praesentium eaque nam, tempore ratione aliquid nihil vel enim?</p>
+                    
+            </div>
+
+            <div class="modal-footer" style="background-image: linear-gradient(45deg, #28ad33, #1a6b20);">
+                <button type="button" class="btn btn-link" data-dismiss="modal" style="color: white;">Cancelar</button>
+                
+            </div>
+        </form>
+    </div>
+</div>
+<!-- MODAL ENDS HERE  -->
+
+<!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+<!-- SCRIPTS END -->
+
 </body>
 </html>

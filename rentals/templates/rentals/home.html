@@ -3,45 +3,101 @@
 <!-- this is really important is telling the template that is going to load the extend -->
 {% load static %}
 
-<!-- Content that is going to chance -->
+<!-- Content that is going to change -->
 {%  block content %}
-<div class="album py-5 bg-light">
+<div style="background-color: azure;">
   <div class="container">
-    <div class="row">
-      {% if estates_list %}
-        {% for estate in estates_list %}
-        <!-- CUSTOMIZE FROM HERE -->
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                dy=".3em">Thumbnail</text>
-            </svg>
-            <div class="card-body">
-              <h5 class="card-title">{{estate.title}}</h5>
-              <p class="card-text" style="font-size: 13px">Zona: {{estate.zone}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary" href="{% url 'rentals:details' estate.id %}">Ver</a>
-                </div>
-                <small class="text-muted">Precio: {{estate.amount}}</small>
-                <small class="text-muted">Capacidad: {{estate.pax}}</small>
+
+    <!--Section: Offers-->
+    <section style="background-color: azure;" id="offers" class="pt-2 pb-3">
+
+      <!-- Grid row -->
+      <div class="row mt-4">
+        {% if estates_list %}
+            {% for estate in estates_list %}
+          <!-- Grid column -->
+          <div class="cardCont col-md-6 col-lg-4">
+
+            <!--Card-->
+            <div class="myCard card card-personal mb-4">
+
+              <!--Card image-->
+              <div class="view overlay">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/26.jpg"
+                  alt="Card image cap">
+                <a href="#!">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
               </div>
+              <!--Card image-->
+
+              <!--Card content-->
+              <div class="card-body">
+                <!--Title-->
+                <a>
+                  <h5 class="font-weight-bold text-uppercase">
+                    {{estate.title}}
+                  </h5>
+                </a>
+                <a>
+                  <span class="badge badge-success py-2 px-2">${{estate.amount}}</span>
+                </a>
+
+                <!--Text-->
+                <p class="grey-text mt-2">Zona: {{estate.zone}}
+                  <!--Grid row-->
+                  <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 text-center">
+                      <p class="dark-grey-text">
+                        <i class="fas fa-hotel dark-grey-text" aria-hidden="true"></i> {{estate.pax}} Pers</p>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 text-center">
+                      <p class="dark-grey-text">
+                        <i class="fas fa-utensils dark-grey-text" aria-hidden="true"></i> Cena</p>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 text-center">
+                      <p class="dark-grey-text">
+                        <i class="fas fa-wifi dark-grey-text" aria-hidden="true"></i> Wi-Fi</p>
+                    </div>
+                    <!--Grid column-->
+
+                  </div>
+                  <!--Grid row-->
+                </p>
+                <hr>
+                <!--Grid column-->
+                <div class="col-12 text-center">
+                  <a href="{% url 'rentals:details' estate.id %}" class="butt btn btn-success btn-sm font-weight-bold btn-rounded">
+                    Detalles
+                  </a>
+                </div>
+                <!--Grid column-->
+
+              </div>
+              <!--Card content-->
+
             </div>
-          </div>
-        </div>
-        {% endfor %}
-      {% else %}
-        <h3 class="alert alert-info" role="alert" style="text-align: center; margin-left: 170px;" >
-          <strong style="text-align: center;">No hay propiedades para mostrar con los datos ingresados</strong>
-        </h3>
+            <!--Card-->
+            {% endfor %}
+                {% else %}
+                <h3 class="alert alert-info" role="alert" style="text-align: center; margin-left: 170px;" >
+                <strong style="text-align: center;">No hay propiedades para mostrar con los datos ingresados</strong>
+                </h3>
 
-      {% endif %}
+        {% endif %}
+      </div>
+      <!-- Grid row -->
 
-    </div>
+    </section>
+    <!--Section: Offers-->
   </div>
 </div>
-
 {% endblock %}
