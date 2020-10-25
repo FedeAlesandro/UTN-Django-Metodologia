@@ -78,8 +78,6 @@ def check_date(since_date, to_date):
 
 def details(request, estate_id):
     try:
-        print("AAAAAAAAAA")
-        print(date_list)
         estate = Estate.objects.get(pk=estate_id)
         subtotal = estate.amount * len(date_list)
         commission = estate.commission
@@ -110,8 +108,6 @@ def reserve(request, estate_id):
                                       guest_last_name=guest_last_name, guest_email=guest_email)
             reservation.save()
 
-            print("BBBBBBBB")
-            print(date_list)
             for date in date_list:
                 rental_date = RentalDate.objects.filter(date=date, estate=estate_id)
                 rental_date = rental_date[0]

@@ -1,8 +1,6 @@
 from django.contrib import admin
 from django.db import models
 from django.forms import CheckboxSelectMultiple
-from django.contrib.auth import get_user
-
 from rentals.models import Facility, City, Reservation, Estate, RentalDate
 
 
