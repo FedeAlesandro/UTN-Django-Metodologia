@@ -2,76 +2,104 @@
 {% extends "rentals/base.html" %}
 <!-- this is really important is telling the template that is going to load the extend -->
 {% load static %}
-<!-- Content that is going to chance -->
+
+<!-- Content that is going to change -->
 {%  block content %}
-<!-- Contact Us Section -->
-<div style="background-color: white">
-  <br>
-  <section class="Material-contact-section section-padding section-dark" style="background-color: white">
-    <div class="container">
-      <div class="row">
-        <!-- Section Titile -->
-        <div class="col-md-12 wow animated fadeInLeft" data-wow-delay=".2s">
-          <h2 class="section-title">{{estate.title}}</h2>
-        </div>
+<div style="background-color: azure;">
+  <div class="container dark-grey-text">
+    <div class="row">
+      <div class="col-lg" style="margin-top: 20px; margin-bottom:20px">
+        <h2>{{estate.title}}</h2>
+
+        {{estate.description}}
+
+        {% for facility in estate.facility.all %}
+        <li>{{facility}}</li>
+        {% endfor %}
+
+        {{estate.zone}}
+
+        
+
+        {{estate.amount}}
+
       </div>
-      <div class="row">
-        <!-- Section Titile -->
-        <div class="col-md-6 mt-3 contact-widget-section2 wow animated fadeInLeft" data-wow-delay=".2s">
-          <p>{{estate.description}}</p>
+      <div class="col-sm-4" style="margin-top: 20px; margin-bottom:20px;">
+        <div class="card " style="width: 20rem; margin-left: 30px;">
+          <div class="card-body text-center">
+            <h5 class="card-title">Haz la reserva!</h5>
+            <hr>
+            <ul class="list-group">
+              <li class="list-group-item active">Datos de la reserva</li>
+              <li class="list-group-item py-2">Desde: {{since_date}}</li>
+              <li class="list-group-item py-2">Hasta: {{to_date}}</li>
+              <li class="list-group-item py-2">Cant. de personas: {{estate.pax}}</li>
+              <li class="list-group-item py-2">Subtotal: {{subtotal}}</li>
+              <li class="list-group-item py-2">Comisión: {{commission}}</li>
+              <li class="list-group-item py-2 font-weight-bold">Total: {{total}}</li>
 
-          {% for facility in estate.facility.all %}
-          <li>{{facility}}</li>
-          {% endfor %}
-
-          <div class="find-widget">
-            {{estate.zone}}
+            </ul>
+            <hr>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reserve">
+              Reservar
+            </button>
           </div>
-          <div class="find-widget">
-            {{estate.pax}}
-          </div>
-
-          <div class="find-widget">
-            {{estate.amount}}
-          </div>
-
-        </div>
-        <!-- contact form -->
-        <div class="col-md-6 wow animated fadeInRight" data-wow-delay=".2s">
-          <form class="shake" role="form" action="{% url 'rentals:reserve' estate.id %}" method="POST" id="contactForm" name="contact-form" data-toggle="validator">
-            {% csrf_token %}
-            <!-- Name -->
-            <div class="form-group label-floating">
-              <label class="control-label" for="name">Nombre</label>
-              <input class="form-control" id="name" type="text" name="name" required
-                data-error="Please enter your name">
-              <div class="help-block with-errors"></div>
-            </div>
-            <!-- Last name -->
-            <div class="form-group label-floating">
-              <label class="control-label" for="last_name">Apellido</label>
-              <input class="form-control" id="last_name" type="text" name="last_name" required
-                data-error="Please enter your last name">
-              <div class="help-block with-errors"></div>
-            </div>
-            <!-- Email -->
-            <div class="form-group label-floating">
-              <label class="control-label" for="email">Email</label>
-              <input class="form-control" id="email" type="email" name="email" required
-                data-error="Please enter your Email">
-              <div class="help-block with-errors"></div>
-            </div>
-            <!-- Form Submit -->
-            <div class="form-submit mt-5">
-              <button class="btn btn-common" type="submit" id="form-submit"><i
-                  class="material-icons mdi mdi-message-outline"></i> Reservar</button>
-              <div id="msgSubmit" class="h3 text-center hidden"></div>
-              <div class="clearfix"></div>
-            </div>
-          </form>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="reserve" tabindex="-1" role="dialog" aria-labelledby="reserveLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form action="{% url 'rentals:reserve' estate.id %}" method="POST">
+          {% csrf_token %}
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Reservar</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- contact form -->
+            <div class="row">
+              <!-- Name -->
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label class="control-label" for="name">Nombre</label>
+                  <input class="form-control" id="name" type="text" name="name" required
+                    data-error="Please enter your name">
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <!-- Last name -->
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label class="control-label" for="last_name">Apellido</label>
+                  <input class="form-control" id="last_name" type="text" name="last_name" required
+                    data-error="Please enter your last name">
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <!-- Email -->
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label class="control-label" for="email">Email</label>
+                  <input class="form-control" id="email" type="email" name="email" required
+                    data-error="Please enter your Email">
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+              <button class="btn btn-success" type="submit">Confirmar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </div>
 {% endblock %}
