@@ -5,8 +5,8 @@ The proyect is about an Lodging System for an non existing company
 * [Python](https://www.python.org/) - The programming language
 * [Django](https://www.djangoproject.com/) - The Python Framework 
 * [Pillow](https://pillow.readthedocs.io/en/stable/) - Dependency for images
-* [VirtualEnv] (https://virtualenv.pypa.io/en/latest/) - OPTIONAL Dependency for making your own enviroment
-* [SqlLite] (https://www.sqlite.org/index.html) - The database for only testing purpouse.
+* [VirtualEnv](https://virtualenv.pypa.io/en/latest/) - OPTIONAL Dependency for making your own enviroment
+* [SqlLite](https://www.sqlite.org/index.html) - The database for only testing purpouse.
 
 ### Pre-requisites 📋
 
