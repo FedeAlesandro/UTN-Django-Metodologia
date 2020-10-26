@@ -1,0 +1,2 @@
+- Install Pillow:
+  pip install pillow
