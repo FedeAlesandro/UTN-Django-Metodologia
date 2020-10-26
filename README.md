@@ -20,7 +20,7 @@ The proyect is about an Lodging System for an non existing company.
 
 * **Ivan Graciarena** - *Initial work* - [ivanmdq22](https://github.com/IGraciarena)
 * **Jorge Villordo** - *Initial work* - [georgie](https://github.com/villordo)
-* **Fede Alessandro** - *Initial work* - [FedeAlesandro](https://github.com/FedeAlesandro)
+* **Fede Alesandro** - *Initial work* - [FedeAlesandro](https://github.com/FedeAlesandro)
 * **Fabio Laguna** - *Initial work* - [fabiolaguna](https://github.com/fabiolaguna)
 
 ## Greatings 🎁
