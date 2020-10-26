@@ -1,5 +1,5 @@
 # UTN-Django-Metodologia
-The proyect is about an Lodging System for an non existing company.
+The proyect is about a Lodging System for an non existing company.
 
 ## Built With 🛠️
 
