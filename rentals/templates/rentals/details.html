@@ -12,36 +12,36 @@
         <p class="h2">{{estate.title}}</p>
         <small class="text-muted text-right">Zona <cite title="zone">{{estate.zone}}</cite></small>
         <hr>
-        <img src="{{ estate.image.url }}" style="max-width: 100%" class="img-fluid" alt="Estate image">
+        <img src="{{ estate.image.url }}" style="height: 450px; width: 700px; border-radius: 10px;" class="myCard img-fluid" alt="Estate image">
         <hr>
       </div>
-      <div class="col-sm-4" style="margin-top: 20px; margin-bottom:20px;">
+      <div class="col-sm-4" style="margin-top: 100px; margin-bottom:20px;">
         <div class="card " style="width: 20rem; margin-left: 30px;">
-          <div class="card-body text-center">
+          <div class="myCard card-body text-center">
             <h5 class="card-title">Haz la reserva!</h5>
             <hr>
             <ul class="list-group">
-              <li class="list-group-item active">Datos de la reserva</li>
-              <li class="list-group-item py-2">Desde: {{since_date}}</li>
-              <li class="list-group-item py-2">Hasta: {{to_date}}</li>
-              <li class="list-group-item py-2">Cant. de personas: {{estate.pax}}</li>
-              <li class="list-group-item py-2">Subtotal: {{subtotal}}</li>
-              <li class="list-group-item py-2">Comisión: {{commission}}</li>
-              <li class="list-group-item py-2 font-weight-bold">Total: {{total}}</li>
+              <li style="background: linear-gradient(45deg, #007bff, #1a6b20); color: white;" class="list-group-item">Datos de la reserva</li>
+              <li class="list-group-item py-2"><i class="fas fa-calendar"></i> Desde: {{since_date}}</li>
+              <li class="list-group-item py-2"><i class="fas fa-calendar"></i> Hasta: {{to_date}}</li>
+              <li class="list-group-item py-2"> <i class="fas fa-users"></i> Personas: {{estate.pax}}</li>
+              <li class="list-group-item py-2">Subtotal: <i class="fas fa-dollar-sign"></i> {{subtotal}}</li>
+              <li class="list-group-item py-2">Comisión: <i class="fas fa-dollar-sign"></i> {{commission}}</li>
+              <li class="list-group-item py-2 font-weight-bold">Total: <i class="fas fa-dollar-sign"></i> {{total}}</li>
 
             </ul>
             <hr>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reserve">
+            <button type="button" class="butt btn btn-primary" data-toggle="modal" data-target="#reserve">
               Reservar
             </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div style="margin-bottom: 30px;" class="row">
           <div class="col-4">
             <div class="list-group" id="list-tab" role="tablist">
-              <a class="list-group-item list-group-item-action active" id="list-description-list" data-toggle="list"
+              <a  class="list-group-item list-group-item-action active" id="list-description-list" data-toggle="list"
                 href="#list-description" role="tab" aria-controls="description">Descripción</a>
               <a class="list-group-item list-group-item-action" id="list-facilities-list" data-toggle="list"
                 href="#list-facilities" role="tab" aria-controls="facilities">Servicios</a>
@@ -52,7 +52,7 @@
               <div class="tab-pane fade show active" id="list-description" role="tabpanel"
                 aria-labelledby="list-description-list">
                 <blockquote class="list-group">
-                  <p class="list-group-item text-justify text-break" style="text-indent: 20px;">{{estate.description}}</p>
+                  <p class="list-group-item text-justify text-break" style="text-indent: 10px; word-wrap:break-word;">{{estate.description}}</p>
                 </blockquote>
               </div>
               <div class="tab-pane fade" id="list-facilities" role="tabpanel" aria-labelledby="list-facilities-list">
@@ -74,9 +74,9 @@
       <div class="modal-content">
         <form action="{% url 'rentals:reserve' estate.id %}" method="POST">
           {% csrf_token %}
-          <div class="modal-header">
+          <div class="modal-header" style="background: linear-gradient(45deg, #007bff, #1a6b20); color: white;">
             <h5 class="modal-title" id="exampleModalLabel">Reservar</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: honeydew;">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -111,7 +111,7 @@
                 </div>
               </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" >
               <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
               <button class="btn btn-success" type="submit">Confirmar</button>
             </div>

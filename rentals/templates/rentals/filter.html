@@ -162,15 +162,12 @@
                                 <input type="text" class="myInput" name="city" placeholder="Ciudad" required>
                             </div>
                             {% if flag %}
-                                <div class="invalid-feedback"><small>Las fechas ingresadas son incorrectas.</small></div>
+                                <script>
+                                    window.alert("Por favor ingrese las fechas correctamente.");
+                                </script>
                             {% endif %}
-                            <div class="form-group">
-                                <label><input type="checkbox" id="check_1" name="check_1">
-                                <small>He leido y estoy de acuerdo con los <a href="#" data-toggle="modal" data-target="#terms">terminos y condiciones</a>.</small></input>
-                                <div class="invalid-feedback">Debes aceptar los terminos.</div>
-                                </label>
-                            </div>
-                            <input type="submit" class="butt" value="BUSCAR PROPIEDAD">
+                            
+                            <input style="margin-top: 20px;" type="submit" class="butt" value="BUSCAR PROPIEDAD">
                         </form>
                     </div>
                 </div>
@@ -209,7 +206,7 @@
             <div class="modal-body" style="align-items: center; left: 100px;"> 
                 <ul> 
                     <li style="font-size: 25px;">Jorge Villordo <a target="_blank" href="https://github.com/villordo"><i class="fab fa-github"></i></a> <a target="_blank" href="https://www.linkedin.com/in/jorge-villordo-145102191/"><i class="fab fa-linkedin"></i></a></li>
-                    <li style="font-size: 25px;">Federico Alessandro <a target="_blank" href="https://github.com/FedeAlesandro"><i class="fab fa-github"></i></a> <a target="_blank" href="https://www.linkedin.com/in/fedealesandro/"><i class="fab fa-linkedin"></i></a></li>
+                    <li style="font-size: 25px;">Federico Alesandro <a target="_blank" href="https://github.com/FedeAlesandro"><i class="fab fa-github"></i></a> <a target="_blank" href="https://www.linkedin.com/in/fedealesandro/"><i class="fab fa-linkedin"></i></a></li>
                     <li style="font-size: 25px;">Ivan Graciarena <a target="_blank" href="https://github.com/IGraciarena"><i class="fab fa-github"></i></a> <a target="_blank" href="https://www.linkedin.com/in/ivan-graciarena/"><i class="fab fa-linkedin"></i></a></li>
                     <li style="font-size: 25px;">Fabio Laguna <a target="_blank" href="https://github.com/fabiolaguna"><i class="fab fa-github"></i></a> <a target="_blank" href="https://www.linkedin.com/in/fabiolaguna/"><i class="fab fa-linkedin"></i></a></li>
                 </ul>
@@ -228,7 +225,7 @@
 <!-- MODAL TERMS OF SERVICE START HERE  -->
 <div class="modal fade" id="terms" tabindex="-1" role="dialog" aria-labelledby="terms" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form class="modal-content" action="<?php echo FRONT_ROOT?>Cinema/edit" method="POST">
+        <form class="modal-content" method="POST">
             <div class="modal-header" style="background-image: linear-gradient(45deg, #28ad33, #1a6b20);">
 
                 <h5 class="modal-title" style="color: honeydew;">Terms of service</h5>

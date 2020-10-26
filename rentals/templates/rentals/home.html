@@ -14,86 +14,75 @@
       <!-- Grid row -->
       <div class="row mt-4">
         {% if estates_list %}
-            {% for estate in estates_list %}
-          <!-- Grid column -->
-          <div class="cardCont col-md-6 col-lg-4">
+        {% for estate in estates_list %}
+        <!-- Grid column -->
+        <div class="cardCont col-md-6 col-lg-4">
 
-            <!--Card-->
-            <div class="myCard card card-personal mb-4">
+          <!--Card-->
+          <div class="myCard card card-personal mb-4">
 
-              <!--Card image-->
-              <div class="view overlay">
-                <a href="{% url 'rentals:details' estate.id %}">
-                  <img class="card-img-top" src="{{ estate.image.url }}"
-                  alt="Estate picture">
-                </a>
-              </div>
-              <!--Card image-->
+            <!--Card image-->
+            <div class="view overlay">
+              <a href="{% url 'rentals:details' estate.id %}">
+                <img style="height: 260px;" class="card-img-top" src="{{ estate.image.url }}" alt="Estate picture">
+              </a>
+            </div>
+            <!--Card image-->
 
-              <!--Card content-->
-              <div class="card-body">
-                <!--Title-->
-                <a>
-                  <h5 class="font-weight-bold text-uppercase">
-                    {{estate.title}}
-                  </h5>
-                </a>
-                <a>
-                  <span class="badge badge-success py-2 px-2">${{estate.amount}}</span>
-                </a>
+            <!--Card content-->
+            <div class="card-body">
+              <!--Title-->
+              <a>
+                <h5 class="font-weight-bold text-uppercase">
+                  {{estate.title}}
+                </h5>
+              </a>
+              <a>
+                <span class="badge badge-success py-2 px-2">${{estate.amount}}</span>
+              </a>
 
-                <!--Text-->
-                <p class="grey-text mt-2">Zona: {{estate.zone}}
-                  <!--Grid row-->
-                  <div class="row">
+              <!--Text-->
+              <p class="grey-text mt-2">Zona: {{estate.zone}}
+                <!--Grid row-->
+              <div class="row">
 
-                    <!--Grid column-->
-                    <div class="col-lg-4 col-md-12 text-center">
-                      <p class="dark-grey-text">
-                        <i class="fas fa-hotel dark-grey-text" aria-hidden="true"></i> {{estate.pax}} Pers</p>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-lg-4 col-md-12 text-center">
-                      <p class="dark-grey-text">
-                        <i class="fas fa-utensils dark-grey-text" aria-hidden="true"></i> Cena</p>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-lg-4 col-md-12 text-center">
-                      <p class="dark-grey-text">
-                        <i class="fas fa-wifi dark-grey-text" aria-hidden="true"></i> Wi-Fi</p>
-                    </div>
-                    <!--Grid column-->
-
-                  </div>
-                  <!--Grid row-->
-                </p>
-                <hr>
                 <!--Grid column-->
-                <div class="col-12 text-center">
-                  <a href="{% url 'rentals:details' estate.id %}" class="butt btn btn-success btn-sm font-weight-bold btn-rounded">
-                    Seleccionar
-                  </a>
+                <div style="left: 100;" class="col-lg-4 col-md-12 text-center">
+                  <p class="dark-grey-text">
+                    <i class="fas fa-hotel dark-grey-text" aria-hidden="true"></i> {{estate.pax}} Pers</p>
                 </div>
                 <!--Grid column-->
 
+                
+
               </div>
-              <!--Card content-->
+              <!--Grid row-->
+              </p>
+              <hr>
+              <!--Grid column-->
+              <div class="col-12 text-center">
+                <a href="{% url 'rentals:details' estate.id %}"
+                  class="butt btn btn-success btn-sm font-weight-bold btn-rounded">
+                  Seleccionar
+                </a>
+              </div>
+              <!--Grid column-->
 
             </div>
-            <!--Card-->
-            {% endfor %}
-                {% else %}
-                <h3 class="alert alert-info" role="alert" style="text-align: center; margin-left: 170px;" >
-                <strong style="text-align: center;">No hay propiedades para mostrar con los datos ingresados</strong>
-                </h3>
+            <!--Card content-->
+
+          </div>
+          <!--Card-->
+        </div>
+        {% endfor %}
+        {% else %}
+          <h3 class="alert alert-info" role="alert" style="text-align: center; margin-left: 170px;">
+            <strong style="text-align: center;">No hay propiedades para mostrar con los datos ingresados</strong>
+          </h3>
 
         {% endif %}
+        <!-- Grid row -->
       </div>
-      <!-- Grid row -->
 
     </section>
     <!--Section: Offers-->

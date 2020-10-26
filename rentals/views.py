@@ -53,7 +53,7 @@ def make_filter(request):
 
             try:
                 city = City.objects.get(name=city)
-                estates_c = Estate.objects.filter(city=city, pax=total_pax)  # filtro por ciudad y por pax
+                estates_c = Estate.objects.filter(city=city, pax__gte=total_pax)  # filtro por ciudad y por pax
 
                 for estate in estates_c:  # recorro todas las propiedades que cumplen con la cuidad y el pax
                     flag = 0
@@ -80,8 +80,12 @@ def details(request, estate_id):
     try:
         estate = Estate.objects.get(pk=estate_id)
         subtotal = estate.amount * len(date_list)
-        commission = estate.commission
-        total = subtotal + subtotal*commission
+        commission = estate.commission * estate.amount
+        total = subtotal + subtotal * estate.commission
+        total = round(total, 2)
+        subtotal = round(subtotal, 2)
+        commission = round(commission, 2)
+       
         context = {
             'estate': estate,
             'since_date': date_list[0],
