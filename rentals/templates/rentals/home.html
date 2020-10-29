@@ -7,6 +7,17 @@
 {%  block content %}
 <div style="background-color: azure;">
   <div class="container">
+    {% if reserve_done %}
+      <br>
+      <div class="text-center alert alert-primary alert-dismissible fade show col-6" style="margin: auto" alert">
+        <h4 class="alert-heading" style="font-weight: 600;">Reserva realizada con exito!</h4>
+            <hr>
+        <p style="font-family: sans-serif;" class="mb-0"> Verá la información de la reserva en su casilla de mail.</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endif %}
 
     <!--Section: Offers-->
     <section style="background-color: azure;" id="offers" class="pt-2 pb-3">
@@ -53,7 +64,7 @@
                 </div>
                 <!--Grid column-->
 
-                
+
 
               </div>
               <!--Grid row-->
@@ -76,9 +87,9 @@
         </div>
         {% endfor %}
         {% else %}
-          <h3 class="alert alert-info" role="alert" style="text-align: center; margin-left: 170px;">
-            <strong style="text-align: center;">No hay propiedades para mostrar con los datos ingresados</strong>
-          </h3>
+        <h3 class="alert alert-info" role="alert" style="text-align: center; margin-left: 170px;">
+          <strong style="text-align: center;">No hay propiedades para mostrar con los datos ingresados</strong>
+        </h3>
 
         {% endif %}
         <!-- Grid row -->

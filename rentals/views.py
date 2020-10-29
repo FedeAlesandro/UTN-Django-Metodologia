@@ -101,6 +101,7 @@ def details(request, estate_id):
 
 def reserve(request, estate_id):
     try:
+        global estates
         estate = get_object_or_404(Estate, pk=estate_id)
         date = datetime.date.today().__str__()
         code = uuid.uuid4().__str__()
@@ -124,6 +125,12 @@ def reserve(request, estate_id):
             reservation.amount = amount + amount * estate.commission
             reservation.save()
 
-            return HttpResponseRedirect(reverse('rentals:home'))
+            reserve_done = True
+            context = {
+                'reserve_done': reserve_done,
+                'estates_list': estates,
+            }
+
+            return render(request, 'rentals/home.html', context)
     except Estate.DoesNotExist:
         raise Http404("Ups! There was a problem!")
